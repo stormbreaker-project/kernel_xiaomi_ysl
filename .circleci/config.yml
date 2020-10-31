@@ -1,0 +1,17 @@
+version: 2.1
+jobs:
+  compile:
+   docker:
+      - image: fr3akyphantom/droid-builder:latest
+   steps:
+      - run:
+          command: |
+           git clone https://github.com/stormbreaker-project/kernel_xiaomi_ysl --single-branch -b eleven --depth=1 ysl
+           cd ysl
+           wget https://raw.githubusercontent.com/ItsVixano/personalscripts/master/kernel/test.sh
+           bash test.sh
+workflows:
+  version: 2.1
+  cooking:
+    jobs:
+      - compile
